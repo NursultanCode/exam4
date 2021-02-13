@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Kitsune",
+    "age": 4,
+    "satiety": 66,
+    "mood": 72,
+    "health": 63,
+    "average": 67
+  },
+  {
+    "name": "Seth",
+    "age": 5,
+    "satiety": 76,
+    "mood": 72,
+    "health": 73,
+    "average": 77
+  },
+  {
+    "name": "Toby",
+    "age": 8,
+    "satiety": 56,
+    "mood": 82,
+    "health": 53,
+    "average": 37
+  }
+]
