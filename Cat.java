@@ -8,6 +8,9 @@ public class Cat{
     private int health;
     private int average;
     private Actionable actionable;
+    boolean played = false;
+    boolean eat = false;
+    boolean heal = false;
 
     public Actionable getActionable() {
         return actionable;
@@ -21,7 +24,9 @@ public class Cat{
         this.actionable = actionable;
     }
 
-
+    public int getAge() {
+        return age;
+    }
 
     public int getSatiety() {
         return satiety;
@@ -65,15 +70,30 @@ public class Cat{
     }
 
     public void eat() {
-        actionable.eat(this);
+        if (eat) System.out.println(name+" is eat already today!");
+        else {
+            actionable.eat(this);
+            System.out.println(name+" is eat successfully");
+        }
+        eat = true;
     }
 
     public void play() {
-        actionable.play(this);
+        if (played) System.out.println(name+" is played already today!");
+        else {
+            actionable.play(this);
+            System.out.println(name+" is played successfully");
+        }
+        played = true;
     }
 
     public void heal() {
-        actionable.heal(this);
+        if (heal) System.out.println(name+" is healed already today!");
+        else {
+            actionable.heal(this);
+            System.out.println(name+" is heal successfully");
+        }
+        heal = true;
     }
     public void nextDay(){
         Random random = new Random();
@@ -81,6 +101,9 @@ public class Cat{
         setMood(getMood()+(random.nextInt(4)-3));
         setHealth(getHealth()+(random.nextInt(4)-3));
         setAverage();
+        eat = false;
+        heal = false;
+        played = false;
     }
 
     public static class Builder{
@@ -95,6 +118,7 @@ public class Cat{
             this.name = name;
             return this;
         }
+
 
         public Builder setAge(int age) throws Exception {
             checkForException(age);

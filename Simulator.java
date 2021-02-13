@@ -17,7 +17,9 @@ public class Simulator {
             System.out.println("2 - Play with Cat");
             System.out.println("3 - Feed the cat");
             System.out.println("4 - Tread the cat");
-            System.out.println();
+            System.out.println("5 - Next Day");
+            System.out.println("6 - sort");
+            System.out.println("7-exit");
             int n = scanner.nextInt();
             switch (n){
                 case 1:
@@ -28,29 +30,42 @@ public class Simulator {
                     break;
                 case 2:
                     System.out.println("You selected Play with cat!");
+                    cats.printAllCats();
                     int a = askTheCat();
                     cats.getCats().get(a-1).play();
-                    System.out.println("You have successfully played with "+cats.getCats().get(a-1).getName());
                     cats.printAllCats();
                     askOperation();
                     break;
                 case 3:
                     System.out.println("You selected Feed the cat!");
+                    cats.printAllCats();
                     a = askTheCat();
                     cats.getCats().get(a-1).eat();
-                    System.out.println("You have successfully Feed with "+ cats.getCats().get(a-1).getName());
                     cats.printAllCats();
                     askOperation();
                     break;
                 case 4:
                     System.out.println("You selected Tread the cat!");
+                    cats.printAllCats();
                     a = askTheCat();
                     cats.getCats().get(a-1).heal();
-                    System.out.println("You have successfully Tread with "+ cats.getCats().get(a-1).getName());
                     cats.printAllCats();
                     askOperation();
                     break;
-
+                case 5:
+                    System.out.println("You selected next day!");
+                    cats.getCats().forEach(Cat::nextDay);
+                    System.out.println("Next day operation completed Successfully");
+                    cats.printAllCats();
+                    askOperation();
+                    break;
+                case 6:
+                    askForSort();
+                    cats.printAllCats();
+                    askOperation();
+                    break;
+                case 7:
+                    break;
                 default:
                     System.out.println("wrong input!");
                     askOperation();
@@ -60,6 +75,47 @@ public class Simulator {
             askOperation();
         }
 
+    }
+
+    private void askForSort() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1 - By Name");
+        System.out.println("2 - By Age");
+        System.out.println("3 - By Mood");
+        System.out.println("4 - By Health");
+        System.out.println("5 - By Satiety");
+        System.out.println("Enter the Number:");
+        try{
+            int num = scanner.nextInt();
+            switch (num){
+                case 1:
+                    System.out.println("Sorted by Name");
+                    cats.sortByName();
+                    break;
+                case 2:
+                    System.out.println("Sorted by Age");
+                    cats.sortByAge();
+                    break;
+                case 3:
+                    System.out.println("Sorted by Mood");
+                    cats.sortByMood();
+                    break;
+                case 4:
+                    System.out.println("Sorted by Health");
+                    cats.sortByHealth();
+                    break;
+                case 5:
+                    System.out.println("Sorted by Satiety");
+                    cats.sortBySatiety();
+                    break;
+                default:
+                    System.out.println("Wrong input");
+                    askForSort();
+            }
+        }catch (Exception e){
+            System.out.println("Wrong input!");
+            askForSort();
+        }
     }
 
     private  int askTheCat() {
@@ -85,9 +141,9 @@ public class Simulator {
             Cat cat  = new Cat.Builder()
                     .setName(name)
                     .setAge(age)
-                    .setSatiety(random.nextInt(100))
-                    .setMood(random.nextInt(100))
-                    .setHealth(random.nextInt(100))
+                    .setSatiety(random.nextInt(80)+20)
+                    .setMood(random.nextInt(80)+20)
+                    .setHealth(random.nextInt(80)+20)
                     .setAverage()
                     .build();
             cats.addCat(cat);

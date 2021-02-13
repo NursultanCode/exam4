@@ -21,6 +21,7 @@ public class AllCats {
             formCats = List.of(gson.fromJson(Files.readString(filePath), Cat[].class));
             cats.addAll(formCats);
             cats.forEach(Cat::setActionable);
+            cats.forEach(Cat::setAverage);
             makeSort();
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,6 +41,21 @@ public class AllCats {
     }
     public void makeSort(){
         cats.sort(comparing(Cat::getAverage).reversed());
+    }
+    public void sortByHealth(){
+        cats.sort(comparing(Cat::getHealth).reversed());
+    }
+    public void sortByMood(){
+        cats.sort(comparing(Cat::getMood).reversed());
+    }
+    public void sortBySatiety(){
+        cats.sort(comparing(Cat::getSatiety).reversed());
+    }
+    public void sortByName(){
+        cats.sort(comparing(Cat::getName));
+    }
+    public void sortByAge(){
+        cats.sort(comparing(Cat::getAge).reversed());
     }
 
     public  void printAllCats(){
