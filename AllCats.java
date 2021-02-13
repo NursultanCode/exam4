@@ -20,6 +20,7 @@ public class AllCats {
             cats = new ArrayList<>();
             formCats = List.of(gson.fromJson(Files.readString(filePath), Cat[].class));
             cats.addAll(formCats);
+            cats.forEach(Cat::setActionable);
             makeSort();
         } catch (IOException e) {
             e.printStackTrace();

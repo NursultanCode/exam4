@@ -1,10 +1,51 @@
-public class Cat {
+import java.util.Random;
+
+public class Cat{
     private String name;
     private int age;
     private int satiety;
     private int mood;
     private int health;
     private int average;
+    private Actionable actionable;
+
+    public Actionable getActionable() {
+        return actionable;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setActionable(Actionable actionable) {
+        this.actionable = actionable;
+    }
+
+
+
+    public int getSatiety() {
+        return satiety;
+    }
+
+    public void setSatiety(int satiety) {
+        this.satiety = satiety;
+    }
+
+    public int getMood() {
+        return mood;
+    }
+
+    public void setMood(int mood) {
+        this.mood = mood;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public String printCat(int i) {
         return String.format("%-3d|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|",i,name,age,health,satiety,mood,average);
@@ -12,6 +53,34 @@ public class Cat {
 
     public int getAverage() {
         return average;
+    }
+
+    public void setAverage() {
+        average = (health+mood+satiety)/3;
+    }
+    public void setActionable(){
+        if (age<=5) actionable = new Young();
+        else if (age<=10) actionable = new Middle();
+        else actionable = new Old();
+    }
+
+    public void eat() {
+        actionable.eat(this);
+    }
+
+    public void play() {
+        actionable.play(this);
+    }
+
+    public void heal() {
+        actionable.heal(this);
+    }
+    public void nextDay(){
+        Random random = new Random();
+        setSatiety(getSatiety()-(random.nextInt(5)+1));
+        setMood(getMood()+(random.nextInt(4)-3));
+        setHealth(getHealth()+(random.nextInt(4)-3));
+        setAverage();
     }
 
     public static class Builder{
@@ -64,13 +133,12 @@ public class Cat {
             cat.mood = this.mood;
             cat.satiety = this.satiety;
             cat.average = this.average;
+            cat.setActionable();
             return cat;
         }
 
     }
-    private Cat(){
 
-    }
     public static class WrongInputException extends Exception{
 
     }
