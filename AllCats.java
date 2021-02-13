@@ -3,16 +3,20 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllCats {
-    public List<Cat> cats;
+    ArrayList <Cat> cats;
+    public List<Cat> formCats;
 
     public AllCats() {
         var filePath = Path.of("src", "cats.json");
         Gson gson = new Gson();
         try {
-            cats = List.of(gson.fromJson(Files.readString(filePath), Cat[].class));
+            cats = new ArrayList<>();
+            formCats = List.of(gson.fromJson(Files.readString(filePath), Cat[].class));
+            cats.addAll(formCats);
         } catch (IOException e) {
             e.printStackTrace();
         }

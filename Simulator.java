@@ -13,11 +13,14 @@ public class Simulator {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which operation you want?(Enter the number)");
         System.out.println("1 - Add cat");
+        System.out.println();
         int n = scanner.nextInt();
         switch (n){
             case 1:
                 addCat();
+                System.out.println("You have successfully added Cat!");
                 cats.printAllCats();
+                askOperation();
                 break;
         }
     }
@@ -40,9 +43,11 @@ public class Simulator {
                     .setAverage()
                     .build();
             cats.addCat(cat);
-        } catch (Exception e) {
+        } catch (Cat.WrongInputException e) {
             System.out.println("Wrong input of Age!");
             addCat();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

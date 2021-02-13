@@ -29,22 +29,22 @@ public class Cat {
             return this;
         }
 
-        private void checkForException(int n) throws Exception {
+        private void checkForException(int n) throws WrongInputException {
             if (n<1||n>18) {
-                throw new Exception();
+                throw new WrongInputException();
             }
         }
 
 
-        public Builder setSatiety(int satiety) throws Exception {
+        public Builder setSatiety(int satiety){
             this.satiety = satiety;
             return this;
         }
-        public Builder setMood(int mood) throws Exception {
+        public Builder setMood(int mood){
             this.mood = mood;
             return this;
         }
-        public Builder setHealth(int health) throws Exception {
+        public Builder setHealth(int health){
             this.health = health;
             return this;
         }
@@ -65,6 +65,9 @@ public class Cat {
 
     }
     private Cat(){
+
+    }
+    public static class WrongInputException extends Exception{
 
     }
 
