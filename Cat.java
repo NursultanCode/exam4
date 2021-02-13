@@ -12,16 +12,9 @@ public class Cat{
     boolean eat = false;
     boolean heal = false;
 
-    public Actionable getActionable() {
-        return actionable;
-    }
 
     public String getName() {
         return name;
-    }
-
-    public void setActionable(Actionable actionable) {
-        this.actionable = actionable;
     }
 
     public int getAge() {
@@ -52,10 +45,6 @@ public class Cat{
         this.health = health;
     }
 
-    public String printCat(int i) {
-        return String.format("%-3d|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|",i,name,age,health,satiety,mood,average);
-    }
-
     public int getAverage() {
         return average;
     }
@@ -63,6 +52,7 @@ public class Cat{
     public void setAverage() {
         average = (health+mood+satiety)/3;
     }
+
     public void setActionable(){
         if (age<=5) actionable = new Young();
         else if (age<=10) actionable = new Middle();
@@ -95,6 +85,7 @@ public class Cat{
         }
         heal = true;
     }
+
     public void nextDay(){
         Random random = new Random();
         setSatiety(getSatiety()-(random.nextInt(5)+1));
@@ -167,5 +158,8 @@ public class Cat{
 
     }
 
+    public String printCat(int i) {
+        return String.format("%-3d|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|",i,name,age,health,satiety,mood,average);
+    }
 
 }
