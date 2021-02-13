@@ -10,6 +10,10 @@ public class Cat {
         return String.format("%-3d|%-10s|%-10s|%-10s|%-10s|%-10s|%-10s|",i,name,age,health,satiety,mood,average);
     }
 
+    public int getAverage() {
+        return average;
+    }
+
     public static class Builder{
         private String name;
         private int age;

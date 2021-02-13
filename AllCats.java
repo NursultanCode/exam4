@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import static java.util.stream.Collectors.*;
+import static java.util.Comparator.*;
 
 public class AllCats {
     ArrayList <Cat> cats;
@@ -17,6 +20,7 @@ public class AllCats {
             cats = new ArrayList<>();
             formCats = List.of(gson.fromJson(Files.readString(filePath), Cat[].class));
             cats.addAll(formCats);
+            makeSort();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,7 +35,10 @@ public class AllCats {
 
     public void addCat(Cat cat){
         cats.add(cat);
-        //sorting
+        makeSort();
+    }
+    public void makeSort(){
+        cats.sort(comparing(Cat::getAverage).reversed());
     }
 
     public  void printAllCats(){
